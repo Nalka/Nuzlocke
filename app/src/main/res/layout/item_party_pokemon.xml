@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.barkatit.nuzlocke.data.model.PokemonGender"/>
+        <import type="com.barkatit.nuzlocke.data.model.Type"/>
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.barkatit.nuzlocke.data.model.Pokemon" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:contentPadding="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:id="@+id/iv_sprite"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{model.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toTopOf="@+id/tv_species"
+                app:layout_constraintEnd_toStartOf="@+id/iv_gender_sprite"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/iv_sprite"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Muk Name" />
+
+            <TextView
+                android:id="@+id/tv_species"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{model.species}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_sprite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/iv_sprite"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="Muk Species" />
+
+            <TextView
+                android:id="@+id/tv_type_1"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundResource="@{Type.getTypeByName(model.type).colorId}"
+                android:gravity="center"
+                android:text="@{model.type}"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_sprite"
+                app:layout_constraintTop_toBottomOf="@+id/iv_sprite"
+                android:maxLength="10"
+                android:minEms="5"
+                tools:text="GrassGrassGrass" />
+
+            <TextView
+                android:id="@+id/tv_type_2"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{model.subType}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tv_type_1"
+                app:layout_constraintTop_toBottomOf="@+id/iv_sprite"
+                android:maxLength="10"
+                android:minEms="5"
+                android:textStyle="bold"
+                app:backgroundResource="@{Type.getTypeByName(model.subType).colorId}"
+                android:visibility="@{TextUtils.isEmpty(model.subType) ? View.GONE : View.VISIBLE}"
+                tools:text="Poison" />
+
+            <TextView
+                android:id="@+id/tv_level_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/party_item_level_label"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_type_1"
+                app:layout_constraintStart_toStartOf="@+id/iv_sprite"
+                app:layout_constraintTop_toBottomOf="@+id/iv_sprite" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{Integer.toString(model.level)}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_level_label"
+                app:layout_constraintEnd_toStartOf="@+id/tv_type_1"
+                app:layout_constraintStart_toEndOf="@+id/tv_level_label"
+                app:layout_constraintTop_toTopOf="@+id/tv_level_label"
+                tools:text="61" />
+
+            <ImageView
+                android:id="@+id/iv_gender_sprite"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_name"
+                android:layout_marginEnd="4dp"
+                android:tint="@color/material_on_primary_disabled"
+                android:src="@{model.gender == PokemonGender.FEMALE ? @drawable/gender_female : model.gender == PokemonGender.MALE ? @drawable/gender_male : null}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

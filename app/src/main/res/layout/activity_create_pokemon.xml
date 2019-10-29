@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.barkatit.nuzlocke.data.model.Type" />
+
+        <variable
+            name="viewModel"
+            type="com.barkatit.nuzlocke.ui.create_pokemon.CreatePokemonViewModel" />
+
+        <variable
+            name="speciesData"
+            type="com.barkatit.nuzlocke.data.model.PokemonSpeciesData" />
+
+        <variable
+            name="genderData"
+            type="com.barkatit.nuzlocke.data.model.PokemonGender" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:padding="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_name_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_species"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_name">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/et_species"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_species_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords"
+                        android:paddingStart="12dp"
+                        android:paddingTop="17dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="17dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_type_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="13dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/create_pokemon_type_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_species" />
+
+                <TextView
+                    android:id="@+id/tv_type_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_type_label"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_type_2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_type_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_type_label"
+                    tools:background="@color/pokemon_type_normal"
+
+                    tools:text="Normal" />
+
+                <TextView
+                    android:id="@+id/tv_type_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_type_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_type_1"
+                    app:layout_constraintTop_toTopOf="@+id/tv_type_label"
+                    tools:background="@color/pokemon_type_normal"
+                    tools:text="Normal" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_nature"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_type_label">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_nature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_nature_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_location"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_nature">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_location_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_gender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_location"
+                    android:layout_marginEnd="2dp">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/et_gender"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_gender_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="textCapWords"
+                        android:paddingStart="12dp"
+                        android:paddingTop="17dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="17dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_level"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/il_location"
+                    android:layout_marginStart="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_level_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_hit_points"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_gender">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_hit_points"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_hit_points_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_attack"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_hit_points">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_attack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_attack_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_defence"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_attack">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_defence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_defence_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_special_attack"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/il_hit_points">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_special_attack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_special_attack_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_special_defence"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/il_attack">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_special_defence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_special_defence_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_speed"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/il_defence">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_speed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/create_pokemon_speed_label"
+                        android:importantForAutofill="no"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fab_create_pokemon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:onClick="@{(view) -> viewModel.createPokemon(etName.getText().toString, speciesData, etNature.getText().toString, tvType1.getText().toString, tvType2.getText().toString, etHitPoints.getText().toString, etAttack.getText().toString, etDefence.getText().toString, etSpecialAttack.getText().toString, etSpecialDefence.getText().toString, etSpeed.getText().toString, etLocation.getText().toString, genderData, etLevel.getText().toString)}"
+                    android:text="@string/create_pokemon_create_pokemon"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/il_speed" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>

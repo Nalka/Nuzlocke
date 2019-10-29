@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Nuzlocke</string>
+
+    <string name="create_pokemon_name_hint">Name</string>
+    <string name="create_pokemon_species_hint">Species</string>
+    <string name="create_pokemon_nature_hint">Nature</string>
+    <string name="create_pokemon_type_label">Type</string>
+    <string name="create_pokemon_gender_hint">Gender</string>
+    <string name="create_pokemon_location_hint">Place met</string>
+    <string name="create_pokemon_level_hint">Level</string>
+    <string name="create_pokemon_hit_points_label">HP</string>
+    <string name="create_pokemon_attack_label">Attack</string>
+    <string name="create_pokemon_defence_label">Defence</string>
+    <string name="create_pokemon_special_attack_label">Sp. Atk.</string>
+    <string name="create_pokemon_special_defence_label">Sp. Def.</string>
+    <string name="create_pokemon_speed_label">Speed</string>
+    <string name="create_pokemon_create_pokemon">Create Pokemon</string>
+    <string name="create_pokemon_action_bar_title">Create Pokemon</string>
+    <string name="create_pokemon_species_error">Incorrect species</string>
+
+    <string name="pokemon_details_menu_party">Party</string>
+    <string name="pokemon_details_menu_release">Release</string>
+    <string name="pokemon_details_pokemon_moved_msg">Pokemon was moved to party</string>
+    <string name="pokemon_details_action_bar_title">Details</string>
+
+    <string name="box_action_bar_title">Box</string>
+    <string name="box_menu_search">Search</string>
+
+    <string name="party_action_bar_title">Party</string>
+    <string name="party_item_level_label">Lvl.</string>
+
+    <string name="drawer_accessibility_drawer_open">Open the navigation drawer</string>
+    <string name="drawer_accessibility_drawer_close">Close the navigation drawer</string>
+
+    <string name="navigation_item_party">Party</string>
+    <string name="navigation_item_box">Boxed Pokemon</string>
+
+    <array name="pokemon_gender_array">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Genderless</item>
+    </array>
+
+</resources>
