@@ -14,7 +14,7 @@ import com.barkatit.nuzlocke.data.model.PokemonSpeciesData;
 import com.barkatit.nuzlocke.data.model.Type;
 import com.barkatit.nuzlocke.databinding.ActivityCreatePokemonBinding;
 
-public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, ActivityCreatePokemonBinding> implements CreatePokemonView {
+public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, ActivityCreatePokemonBinding> {
 
     @Override
     public void setupView() {

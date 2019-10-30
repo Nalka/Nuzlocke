@@ -33,6 +33,10 @@ public class Repository {
         return databaseRepository.getPokemonById(id);
     }
 
+    public Single<Integer> getPokemonPartyCount() {
+        return databaseRepository.getPokemonPartyCount();
+    }
+
     public Completable updatePokemon(Pokemon pokemon) {
         return databaseRepository.updatePokemon(pokemon);
     }

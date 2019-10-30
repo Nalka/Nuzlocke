@@ -21,7 +21,7 @@ import com.barkatit.nuzlocke.ui.pokemon_details.PokemonDetailsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoxActivity extends BaseActivity<BoxViewModel, ActivityBoxBinding> implements BoxView {
+public class BoxActivity extends BaseActivity<BoxViewModel, ActivityBoxBinding> {
 
     @MenuRes
     private int menuResId = R.menu.box_menu;

@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
-public abstract class BaseActivity<VIEW_MODEL extends BaseViewModel, VIEW_BINDING extends ViewDataBinding> extends DaggerAppCompatActivity implements BaseView {
+public abstract class BaseActivity<VIEW_MODEL extends BaseViewModel, VIEW_BINDING extends ViewDataBinding> extends DaggerAppCompatActivity {
 
     @Inject
     BaseViewModelFactory viewModelFactory;
@@ -59,7 +59,7 @@ public abstract class BaseActivity<VIEW_MODEL extends BaseViewModel, VIEW_BINDIN
 
     public void setUpActionBar() {
         View actionBar = binding.getRoot().findViewById(R.id.action_bar);
-        if(actionBar instanceof MaterialToolbar) {
+        if (actionBar instanceof MaterialToolbar) {
             setSupportActionBar((Toolbar) actionBar);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setTitle(getActionBarText());
@@ -67,36 +67,32 @@ public abstract class BaseActivity<VIEW_MODEL extends BaseViewModel, VIEW_BINDIN
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             View drawerLayout = binding.getRoot().findViewById(R.id.drawer_layout);
-            if(drawerLayout instanceof DrawerLayout) {
+            if (drawerLayout instanceof DrawerLayout) {
                 ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
                         this,
                         (DrawerLayout) drawerLayout,
                         (MaterialToolbar) actionBar,
                         R.string.drawer_accessibility_drawer_open,
                         R.string.drawer_accessibility_drawer_close);
-                ((DrawerLayout)drawerLayout).addDrawerListener(drawerToggle);
+                ((DrawerLayout) drawerLayout).addDrawerListener(drawerToggle);
                 drawerToggle.syncState();
             }
 
             final View navigationView = binding.getRoot().findViewById(R.id.navigation_view);
-            if(navigationView instanceof NavigationView) {
-                ((NavigationView)navigationView).setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            if (navigationView instanceof NavigationView) {
+                ((NavigationView) navigationView).setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.party_nav_item:
-                                if(BaseActivity.this instanceof PartyActivity) {
-
-                                } else {
+                                if (!(BaseActivity.this instanceof PartyActivity)) {
                                     Intent partyIntent = new Intent(BaseActivity.this, PartyActivity.class);
                                     partyIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(partyIntent);
                                 }
                                 break;
                             case R.id.box_nav_item:
-                                if(BaseActivity.this instanceof BoxActivity) {
-
-                                } else {
+                                if (!(BaseActivity.this instanceof BoxActivity)) {
                                     Intent boxIntent = new Intent(BaseActivity.this, BoxActivity.class);
                                     boxIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(boxIntent);
@@ -108,8 +104,14 @@ public abstract class BaseActivity<VIEW_MODEL extends BaseViewModel, VIEW_BINDIN
                 });
             }
         }
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

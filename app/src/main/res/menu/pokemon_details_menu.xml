@@ -10,4 +10,9 @@
         android:id="@+id/pokemon_move_party"
         android:title="@string/pokemon_details_menu_party"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/pokemon_move_box"
+        android:title="@string/pokemon_details_menu_box"
+        app:showAsAction="always"/>
 </menu>

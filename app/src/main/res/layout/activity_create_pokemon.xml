@@ -118,7 +118,6 @@
                     app:layout_constraintStart_toEndOf="@+id/tv_type_label"
                     app:layout_constraintTop_toTopOf="@+id/tv_type_label"
                     tools:background="@color/pokemon_type_normal"
-
                     tools:text="Normal" />
 
                 <TextView

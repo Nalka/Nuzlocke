@@ -12,7 +12,7 @@ import com.barkatit.nuzlocke.data.model.Pokemon;
 import com.barkatit.nuzlocke.databinding.ActivityPartyBinding;
 import com.barkatit.nuzlocke.ui.pokemon_details.PokemonDetailsActivity;
 
-public class PartyActivity extends BaseActivity<PartyViewModel, ActivityPartyBinding> implements PartyView {
+public class PartyActivity extends BaseActivity<PartyViewModel, ActivityPartyBinding> {
 
     @Override
     public void setupView() {

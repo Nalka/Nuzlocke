@@ -20,8 +20,24 @@
 
     <string name="pokemon_details_menu_party">Party</string>
     <string name="pokemon_details_menu_release">Release</string>
-    <string name="pokemon_details_pokemon_moved_msg">Pokemon was moved to party</string>
+    <string name="pokemon_details_menu_box">Box</string>
+    <string name="pokemon_details_pokemon_moved_msg_party">Pokemon was moved to party</string>
+    <string name="pokemon_details_pokemon_moved_msg_box">Pokemon was moved to box</string>
+    <string name="pokemon_details_pokemon_party_too_big_msg">Your Pokemon party has already 6 Pokemon. Move some to the Box first.</string>
     <string name="pokemon_details_action_bar_title">Details</string>
+    <string name="pokemon_details_type_label">Type</string>
+    <string name="pokemon_details_level_label">Lvl.</string>
+    <string name="pokemon_details_nature_label">Nature</string>
+    <string name="pokemon_details_level_met_label">Level met</string>
+    <string name="pokemon_details_location_label">Place met</string>
+    <string name="pokemon_details_caught_label">Met on</string>
+    <string name="pokemon_details_stats_label">Stats</string>
+    <string name="pokemon_details_hit_points_label">HP</string>
+    <string name="pokemon_details_attack_label">Atk</string>
+    <string name="pokemon_details_defence_label">Def</string>
+    <string name="pokemon_details_special_attack_label">Sp Atk</string>
+    <string name="pokemon_details_special_defence_label">Sp Def</string>
+    <string name="pokemon_details_speed_label">Speed</string>
 
     <string name="box_action_bar_title">Box</string>
     <string name="box_menu_search">Search</string>

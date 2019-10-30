@@ -10,13 +10,15 @@ import androidx.databinding.Observable;
 
 import com.barkatit.nuzlocke.R;
 import com.barkatit.nuzlocke.base.BaseActivity;
+import com.barkatit.nuzlocke.data.model.Pokemon;
 import com.barkatit.nuzlocke.databinding.ActivityPokemonDetailsBinding;
 
-public class PokemonDetailsActivity extends BaseActivity<PokemonDetailsViewModel, ActivityPokemonDetailsBinding> implements PokemonDetailsView {
+public class PokemonDetailsActivity extends BaseActivity<PokemonDetailsViewModel, ActivityPokemonDetailsBinding> {
 
     public static final String POKEMON_ID_KEY = PokemonDetailsActivity.class.getSimpleName()+"$PokemonId";
 
     private long pokemonId;
+    private Menu menu;
 
     @MenuRes
     private int menuResId = R.menu.pokemon_details_menu;
@@ -38,14 +40,28 @@ public class PokemonDetailsActivity extends BaseActivity<PokemonDetailsViewModel
                 }
             }
         });
-        viewModel.pokemonMovedToParty.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+        viewModel.showMessageObservableField.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                if(viewModel.pokemonMovedToParty.get() != null && viewModel.pokemonMovedToParty.get() == true) {
-                    Toast.makeText(PokemonDetailsActivity.this, getString(R.string.pokemon_details_pokemon_moved_msg), Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(PokemonDetailsActivity.this, viewModel.showMessageObservableField.get(), Toast.LENGTH_SHORT).show();
             }
         });
+        viewModel.pokemonObservableField.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                Pokemon pokemon = viewModel.pokemonObservableField.get();
+                setupMenu(pokemon);
+            }
+        });
+    }
+
+    private void setupMenu(Pokemon pokemon) {
+        if(menu == null || pokemon == null)
+            return;
+        if(!pokemon.isInParty())
+            menu.findItem(R.id.pokemon_move_box).setVisible(false);
+        if(pokemon.isInParty())
+            menu.findItem(R.id.pokemon_move_party).setVisible(false);
     }
 
     @Override
@@ -66,6 +82,8 @@ public class PokemonDetailsActivity extends BaseActivity<PokemonDetailsViewModel
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(menuResId, menu);
+        this.menu = menu;
+        setupMenu(viewModel.pokemonObservableField.get());
         return true;
     }
 
@@ -75,6 +93,8 @@ public class PokemonDetailsActivity extends BaseActivity<PokemonDetailsViewModel
             viewModel.releasePokemon();
         } else if(item.getItemId() == R.id.pokemon_move_party) {
             viewModel.movePokemonToParty();
+        } else if(item.getItemId() == R.id.pokemon_move_box) {
+            viewModel.movePokemonToBox();
         }
         return super.onOptionsItemSelected(item);
     }

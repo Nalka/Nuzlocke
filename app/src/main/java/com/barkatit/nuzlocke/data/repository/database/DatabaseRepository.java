@@ -32,6 +32,10 @@ public class DatabaseRepository {
         return pokemonDao.getPokemonById(id);
     }
 
+    public Single<Integer> getPokemonPartyCount() {
+        return pokemonDao.getPokemonPartyCount();
+    }
+
     public Completable updatePokemon(Pokemon pokemon) {
         return pokemonDao.updatePokemon(pokemon);
     }

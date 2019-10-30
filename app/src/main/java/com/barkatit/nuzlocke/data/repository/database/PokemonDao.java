@@ -25,6 +25,9 @@ public interface PokemonDao {
     @Query("SELECT * FROM pokemon WHERE id = :id")
     Single<Pokemon> getPokemonById(long id);
 
+    @Query("SELECT COUNT(id) FROM pokemon WHERE inParty = 1")
+    Single<Integer> getPokemonPartyCount();
+
     @Insert
     Completable createPokemon(Pokemon pokemon);
 
