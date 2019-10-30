@@ -3,11 +3,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/party_nav_item"
-            android:icon="@android:drawable/arrow_up_float"
+            android:icon="@drawable/pokeball"
             android:title="@string/navigation_item_party" />
         <item
             android:id="@+id/box_nav_item"
-            android:icon="@android:drawable/arrow_up_float"
+            android:icon="@drawable/pokeball"
             android:title="@string/navigation_item_box" />
     </group>
 </menu>
