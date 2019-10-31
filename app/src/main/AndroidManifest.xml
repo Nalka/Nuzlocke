@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.party.PartyActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ui.create_pokemon.CreatePokemonActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.create_pokemon.CreatePokemonActivity" android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.box.BoxActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

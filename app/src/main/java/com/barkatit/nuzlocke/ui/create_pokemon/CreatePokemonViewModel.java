@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import androidx.databinding.ObservableField;
 
+import com.barkatit.nuzlocke.R;
 import com.barkatit.nuzlocke.base.BaseViewModel;
 import com.barkatit.nuzlocke.data.model.Pokemon;
 import com.barkatit.nuzlocke.data.model.PokemonGender;
@@ -36,6 +37,7 @@ public class CreatePokemonViewModel extends BaseViewModel {
 
     ObservableField<Boolean> finishActivity = new ObservableField<>();
     ObservableField<List<PokemonSpeciesData>> pokemonSpeciesData = new ObservableField<>();
+    ObservableField<Integer> showValidationMessageObservable = new ObservableField<>();
 
     public void fetchAutoCompleteData(final Context context) {
         execute(Single.fromCallable(new Callable<String>() {
@@ -91,6 +93,16 @@ public class CreatePokemonViewModel extends BaseViewModel {
             PokemonGender gender,
             String level
     ) {
+        if(TextUtils.isEmpty(name) || species == null) {
+            int messageId;
+            if(TextUtils.isEmpty(name))
+                messageId = R.string.create_pokemon_missing_name;
+            else
+                messageId = R.string.create_pokemon_species_error;
+            showValidationMessageObservable.set(messageId);
+            return;
+        }
+
         if(TextUtils.isEmpty(attack))
             attack = "0";
         if(TextUtils.isEmpty(defence))

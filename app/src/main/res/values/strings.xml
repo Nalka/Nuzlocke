@@ -17,6 +17,7 @@
     <string name="create_pokemon_create_pokemon">Create Pokemon</string>
     <string name="create_pokemon_action_bar_title">Create Pokemon</string>
     <string name="create_pokemon_species_error">Incorrect species</string>
+    <string name="create_pokemon_missing_name">Name field is required</string>
 
     <string name="pokemon_details_menu_party">Party</string>
     <string name="pokemon_details_menu_release">Release</string>

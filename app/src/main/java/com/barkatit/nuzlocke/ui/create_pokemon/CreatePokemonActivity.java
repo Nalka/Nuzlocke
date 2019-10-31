@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.databinding.Observable;
 
@@ -34,6 +35,13 @@ public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, 
             }
         });
 
+        viewModel.showValidationMessageObservable.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                Toast.makeText(CreatePokemonActivity.this, viewModel.showValidationMessageObservable.get(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         setupGenders();
     }
 
@@ -48,7 +56,6 @@ public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, 
                     binding.etSpecies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                            binding.ilSpecies.setErrorEnabled(false);
                             PokemonSpeciesData pokemonSpeciesData = (PokemonSpeciesData) adapterView.getItemAtPosition(position);
                             displaySpeciesData(pokemonSpeciesData);
                         }
@@ -62,13 +69,11 @@ public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, 
                 if(!hasFocus) {
                     PokemonSpeciesData enteredSpecies = viewModel.getSpeciesDataByName(binding.etSpecies.getText().toString());
                     if(enteredSpecies == null) {
-                        binding.etSpecies.setError(getString(R.string.create_pokemon_species_error));
+                        displaySpeciesData(null);
                     } else {
                         binding.etSpecies.setText(enteredSpecies.getName());
                         displaySpeciesData(enteredSpecies);
                     }
-                } else {
-                    binding.ilSpecies.setErrorEnabled(false);
                 }
             }
         });
@@ -95,6 +100,14 @@ public class CreatePokemonActivity extends BaseActivity<CreatePokemonViewModel, 
 
     private void displaySpeciesData(PokemonSpeciesData pokemonSpeciesData) {
         binding.setSpeciesData(pokemonSpeciesData);
+
+        if(pokemonSpeciesData == null) {
+            binding.tvType1.setVisibility(View.GONE);
+            binding.tvType1.setText("");
+            binding.tvType2.setVisibility(View.GONE);
+            binding.tvType2.setText("");
+            return;
+        }
 
         Type firstType = pokemonSpeciesData.getTypes().get(0);
         binding.tvType1.setVisibility(View.VISIBLE);
